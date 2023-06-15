@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.qfedu.mapper.TenantDao">
+
+    <insert id="register" parameterType="Tenant">
+        insert into tenant (tNickName,tPhone,tPassword) values
+        (#{tNickName},#{tPhone},#{tPassword})
+    </insert>
+
+    <select id="queryPhone" parameterType="String" resultType="String">
+        select tPhone from tenant where tPhone =#{tPhone}
+    </select>
+
+    <select id="login" parameterType="Tenant" resultType="Tenant">
+        select * from tenant
+        <where>
+            <if test="tNickName != null and tNickName != ''">
+                tNickName = #{tNickName}
+            </if>
+            <if test="tPhone != null and tPhone != ''">
+                and tPhone = #{tPhone}
+            </if>
+            <if test="tEmail != null and tEmail != ''" >
+                and tEmail = #{tEmail}
+            </if>
+            <if test="tPassword != null and tPassword">
+                and tPassword = #{tPassword}
+            </if>
+        </where>
+    </select>
+    
+    <update id="changeTenant" parameterType="Tenant">
+        update tenant
+        <set>
+            <if test="tNickName != null and tNickName != ''">
+                tNickname = #{tNickname},
+            </if>
+            <if test="tPhone != null and tPhone != ''">
+                 tPhone = #{tPhone},
+            </if>
+            <if test="tEmail != null and tEmail != ''" >
+                 tEmail = #{tEmail},
+            </if>
+            <if test="tPassword != null and tPassword">
+                 tPassword = #{tPassword}
+            </if>
+        </set>
+        where tId = #{tId}
+    </update>
+
+</mapper>
