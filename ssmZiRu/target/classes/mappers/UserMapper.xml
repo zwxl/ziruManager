@@ -4,7 +4,7 @@
 <mapper namespace="com.cn.qfedu.mapper.UserDao">
 
     <select id="getUser" resultType="User">
-        select * from users where uid = 1
+        select * from users
     </select>
     <select id="selectLogin" parameterType="User" resultType="int" >
         select count(*) from users where uname = #{uname} and password = #{password}
@@ -12,4 +12,12 @@
     <insert id="register" parameterType="User">
         insert into users(uname,password) values (#{uname} ,#{password})
     </insert>
+    <delete id="deleteById">
+        delete from users  where uid = #{uid}
+    </delete>
+    <update id="save" parameterType="User">
+        update users
+        set uname = #{uname}, password = #{password} where uid = #{uid}
+    </update>
+
 </mapper>

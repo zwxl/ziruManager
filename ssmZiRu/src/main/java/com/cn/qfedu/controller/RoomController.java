@@ -29,7 +29,6 @@ public class RoomController {
     @RequestMapping("/findBy")
     @ResponseBody
     public List<Room> findBy(String condition){
-        System.out.println("condition"+condition);
         if(condition==null||condition.equals(" "))
         return roomService.findAllRoom();
         else{
